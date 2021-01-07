@@ -16,6 +16,8 @@ set cpo&vim
 augroup cursorword
   autocmd!
   if has('vim_starting')
+    "echo 'vim_starting'
+    autocmd cursorword WinEnter,BufEnter * call cursorword#init()
     autocmd VimEnter * call cursorword#highlight() |
           \ autocmd cursorword WinEnter,BufEnter * call cursorword#matchadd()
   else
