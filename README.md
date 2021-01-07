@@ -7,6 +7,7 @@ Install with your favorite plugin manager.
 
 ## Author
 itchyny (https://github.com/itchyny)
+
 enhanced by Enze Li(https://github.com/lienze)
 
 ## License
