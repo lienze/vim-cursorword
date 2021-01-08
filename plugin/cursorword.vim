@@ -17,7 +17,9 @@ augroup cursorword
   autocmd!
   if has('vim_starting')
     "echo 'vim_starting'
-    autocmd cursorword WinEnter,BufEnter * call data#init()
+    if exists('g:kcursorword_kernelsource') && g:kcursorword_kernelsource == 1
+      autocmd cursorword WinEnter,BufEnter * call data#init()
+    endif
     autocmd VimEnter * call cursorword#highlight() |
           \ autocmd cursorword WinEnter,BufEnter * call cursorword#matchadd()
   else

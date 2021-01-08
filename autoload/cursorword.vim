@@ -35,8 +35,10 @@ function! cursorword#matchadd(...) abort
   endif
   let w:cursorword_match = 0
   let s:k_match = 0
-  if has_key(w:k_dict, word)
-    let s:k_match = 1
+  if exists('g:kcursorword_kernelsource') && g:kcursorword_kernelsource == 1
+    if has_key(w:k_dict, word)
+      let s:k_match = 1
+    endif
   endif
   if !enable || word ==# '' || len(word) !=# strchars(word) && word !~# s:alphabets || len(word) > 1000 | return | endif
   if s:k_match == 1
