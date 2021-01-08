@@ -36,13 +36,13 @@ function! cursorword#matchadd(...) abort
   let w:cursorword_match = 0
   let s:k_match = 0
   if exists('g:kcursorword_kernelsource') && g:kcursorword_kernelsource == 1
-    if has_key(w:k_dict, word)
+    if has_key(t:k_dict, word)
       let s:k_match = 1
     endif
   endif
   if !enable || word ==# '' || len(word) !=# strchars(word) && word !~# s:alphabets || len(word) > 1000 | return | endif
   if s:k_match == 1
-    let k_dict_word = get(w:k_dict, word, 'default')
+    let k_dict_word = get(t:k_dict, word, 'default')
     let pattern = '\<' . escape(k_dict_word, '~"\.^$[]*') . '\|' . escape(word, '~"\.^$[]*'). '\>'
   else
     let pattern = '\<' . escape(word, '~"\.^$[]*') . '\>'

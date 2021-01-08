@@ -14,13 +14,13 @@ let s:k_dict_raw = {
 \'spin_lock_irq':'spin_unlock_irq',
 \}
 
-let w:k_dict = {}
+let t:k_dict = {}
 
 function! data#init() abort
   "echo "init"
   for i in items(s:k_dict_raw)
-    let w:k_dict[get(i,0)] = get(i,1)
-    let w:k_dict[get(i,1)] = get(i,0)
+    let t:k_dict[get(i,0)] = get(i,1)
+    let t:k_dict[get(i,1)] = get(i,0)
     "echo len(s:k_dict)
   endfor
 endfunction
