@@ -20,21 +20,6 @@ endfunction
 
 let s:alphabets = '^[\x00-\x7f\xb5\xc0-\xd6\xd8-\xf6\xf8-\u01bf\u01c4-\u02af\u0370-\u0373\u0376\u0377\u0386-\u0481\u048a-\u052f]\+$'
 
-let s:k_dict = {}
-
-let s:k_dict_raw = {
-\'mutex_lock':'mutex_unlock',
-\}
-
-function! cursorword#init() abort
-  "echo "init"
-  for i in items(s:k_dict_raw)
-    let s:k_dict[get(i,0)] = get(i,1)
-    let s:k_dict[get(i,1)] = get(i,0)
-    "echo len(s:k_dict)
-  endfor
-endfunction
-
 function! cursorword#matchadd(...) abort
   let enable = get(b:, 'cursorword', get(g:, 'cursorword', 1)) && !has('vim_starting')
   if !enable && !get(w:, 'cursorword_match') | return | endif
@@ -50,12 +35,12 @@ function! cursorword#matchadd(...) abort
   endif
   let w:cursorword_match = 0
   let s:k_match = 0
-  if has_key(s:k_dict, word)
+  if has_key(w:k_dict, word)
     let s:k_match = 1
   endif
   if !enable || word ==# '' || len(word) !=# strchars(word) && word !~# s:alphabets || len(word) > 1000 | return | endif
   if s:k_match == 1
-    let k_dict_word = get(s:k_dict, word, 'default')
+    let k_dict_word = get(w:k_dict, word, 'default')
     let pattern = '\<' . escape(k_dict_word, '~"\.^$[]*') . '\|' . escape(word, '~"\.^$[]*'). '\>'
   else
     let pattern = '\<' . escape(word, '~"\.^$[]*') . '\>'
