@@ -39,8 +39,10 @@ function ToggleKCursorword()
   "echo 'ToggleKCursorword'
   if exists('g:kcursorword_kernelsource') && g:kcursorword_kernelsource == 1
      let g:kcursorword_kernelsource = 0
+     call data#release()
   else
      let g:kcursorword_kernelsource = 1
+     call data#init()
   endif
 endfunction
 
