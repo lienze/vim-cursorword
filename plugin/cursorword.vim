@@ -32,5 +32,17 @@ augroup cursorword
   autocmd InsertLeave * call cursorword#matchadd(0)
 augroup END
 
+command! -nargs=? -complete=buffer -bang ToggleKCursorword
+    \ call ToggleKCursorword()
+
+function ToggleKCursorword()
+  "echo 'ToggleKCursorword'
+  if exists('g:kcursorword_kernelsource') && g:kcursorword_kernelsource == 1
+     let g:kcursorword_kernelsource = 0
+  else
+     let g:kcursorword_kernelsource = 1
+  endif
+endfunction
+
 let &cpo = s:save_cpo
 unlet s:save_cpo
